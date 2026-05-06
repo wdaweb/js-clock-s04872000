@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>粉紅卡通時鐘</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#ffd6e7,#ffc0da);
+  font-family:'Fredoka',sans-serif;
+}
+
+.wrapper{text-align:center;}
+
+.title{
+  font-size:32px;
+  color:#fff;
+  margin-bottom:20px;
+  text-shadow:0 0 10px #ff69b4;
+}
+
+.clock{
+  width:340px;
+  height:340px;
+  border-radius:50%;
+  position:relative;
+  background:radial-gradient(circle,#fff5fa,#ffd6e8);
+  border:10px solid #ff9ecf;
+  box-shadow:0 0 30px #ff8dc5,inset 0 0 20px #fff;
+}
+
+/* 12個數字 */
+.number{
+  position:absolute;
+  width:36px;
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+  font-weight:bold;
+  color:#ff69b4;
+  text-shadow:0 0 8px #fff;
+  top:50%;
+  left:50%;
+}
+
+/* 圓形定位 */
+.n1  {transform:translate(-50%,-50%) rotate(30deg)  translateY(-135px) rotate(-30deg);}
+.n2  {transform:translate(-50%,-50%) rotate(60deg)  translateY(-135px) rotate(-60deg);}
+.n3  {transform:translate(-50%,-50%) rotate(90deg)  translateY(-135px) rotate(-90deg);}
+.n4  {transform:translate(-50%,-50%) rotate(120deg) translateY(-135px) rotate(-120deg);}
+.n5  {transform:translate(-50%,-50%) rotate(150deg) translateY(-135px) rotate(-150deg);}
+.n6  {transform:translate(-50%,-50%) rotate(180deg) translateY(-135px) rotate(-180deg);}
+.n7  {transform:translate(-50%,-50%) rotate(210deg) translateY(-135px) rotate(-210deg);}
+.n8  {transform:translate(-50%,-50%) rotate(240deg) translateY(-135px) rotate(-240deg);}
+.n9  {transform:translate(-50%,-50%) rotate(270deg) translateY(-135px) rotate(-270deg);}
+.n10 {transform:translate(-50%,-50%) rotate(300deg) translateY(-135px) rotate(-300deg);}
+.n11 {transform:translate(-50%,-50%) rotate(330deg) translateY(-135px) rotate(-330deg);}
+.n12 {transform:translate(-50%,-50%) rotate(0deg)   translateY(-135px) rotate(0deg);}
+
+/* 中心點 */
+.center{
+  width:20px;
+  height:20px;
+  background:#fff;
+  border:4px solid hotpink;
+  border-radius:50%;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  z-index:10;
+}
+
+/* 指針 */
+.hand{
+  position:absolute;
+  left:50%;
+  bottom:50%;
+  transform-origin:bottom center;
+  border-radius:30px;
+}
+
+.hour{
+  width:8px;
+  height:70px;
+  background:#ff4fa3;
+  box-shadow:0 0 15px #ff4fa3;
+}
+
+.minute{
+  width:6px;
+  height:100px;
+  background:#7cf9ff;
+  box-shadow:0 0 15px #7cf9ff;
+}
+
+.second{
+  width:3px;
+  height:120px;
+  background:#ffe066;
+  box-shadow:0 0 15px #ffe066;
+}
+
+.digital{
+  margin-top:25px;
+  font-size:34px;
+  color:white;
+  text-shadow:0 0 10px hotpink;
+}
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+  <div class="title">💖 Pink Cute Clock 💖</div>
+
+  <div class="clock">
+    <div class="number n1">1</div>
+    <div class="number n2">2</div>
+    <div class="number n3">3</div>
+    <div class="number n4">4</div>
+    <div class="number n5">5</div>
+    <div class="number n6">6</div>
+    <div class="number n7">7</div>
+    <div class="number n8">8</div>
+    <div class="number n9">9</div>
+    <div class="number n10">10</div>
+    <div class="number n11">11</div>
+    <div class="number n12">12</div>
+
+    <div class="hand hour" id="hour"></div>
+    <div class="hand minute" id="minute"></div>
+    <div class="hand second" id="second"></div>
+    <div class="center"></div>
+  </div>
+
+  <div class="digital" id="digital">00:00:00</div>
+</div>
+
+<script>
+function updateClock(){
+  const now = new Date();
+
+  const h = now.getHours();
+  const m = now.getMinutes();
+  const s = now.getSeconds();
+
+  const hourDeg = (h % 12) * 30 + m * 0.5;
+  const minDeg = m * 6;
+  const secDeg = s * 6;
+
+  document.getElementById("hour").style.transform =
+    `translateX(-50%) rotate(${hourDeg}deg)`;
+
+  document.getElementById("minute").style.transform =
+    `translateX(-50%) rotate(${minDeg}deg)`;
+
+  document.getElementById("second").style.transform =
+    `translateX(-50%) rotate(${secDeg}deg)`;
+
+  document.getElementById("digital").textContent =
+    String(h).padStart(2,'0') + ":" +
+    String(m).padStart(2,'0') + ":" +
+    String(s).padStart(2,'0');
+}
+
+setInterval(updateClock,1000);
+updateClock();
+</script>
+
+</body>
+</html>
